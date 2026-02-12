@@ -73,9 +73,38 @@ export const verification = pgTable(
   (table) => [index("verification_identifier_idx").on(table.identifier)],
 );
 
-export const userRelations = relations(user, ({ many }) => ({
+import {
+  userProfile,
+  household,
+  budget,
+  netWorth,
+  goal,
+  task,
+  journalEntry,
+  sleepOnIt,
+  sleepOnItTracker,
+  focus,
+  favoriteTip,
+  creditChecklistItem,
+  educationProgress,
+} from "./app.schema";
+
+export const userRelations = relations(user, ({ one, many }) => ({
   sessions: many(session),
   accounts: many(account),
+  profile: one(userProfile),
+  households: many(household),
+  budgets: many(budget),
+  netWorths: many(netWorth),
+  goals: many(goal),
+  tasks: many(task),
+  journalEntries: many(journalEntry),
+  sleepOnIts: many(sleepOnIt),
+  sleepOnItTrackers: many(sleepOnItTracker),
+  focuses: many(focus),
+  favoriteTips: many(favoriteTip),
+  creditChecklist: many(creditChecklistItem),
+  educationProgress: many(educationProgress),
 }));
 
 export const sessionRelations = relations(session, ({ one }) => ({
